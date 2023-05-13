@@ -20,7 +20,7 @@ export default function Characters() {
 
   return (
     <>
-    <div clasName={styleCharacters.container}>
+    <div className={styleCharacters.container}>
       <h1>Characters</h1>
       <SearchBar onSearch={() => window.alert()} />
       <Cards characters={characters} />

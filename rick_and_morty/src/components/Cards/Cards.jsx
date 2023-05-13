@@ -7,9 +7,10 @@ export default function Cards({ characters }) {
       {characters.map(({ id,image,name }) => {
         return (
           <Card
-            id={id}
+            key={id}
             image={image}
             name={name}
+            
           />
         );
       })}
