@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    border: 1px solid red;
+    margin: 10px;
+    text-decoration: none;
+    color: black;
+    }
+  
+  .container span{
+    border: 1px solid red;
+    margin: 10px;
+    
+    font-size: 350px;
+    justify-items: center;
+    
+    }
+  
+  .container img{
+    border: 1px solid red;
+    margin: 10px;
+    width: 400px;
+  }
