@@ -19,3 +19,8 @@ export const loginSuccess = (userData) => ({
   payload: userData,
 });
 
+export const logoutSuccess = () => ({
+  type: 'LOGOUT_SUCCESS',
+});
+
+

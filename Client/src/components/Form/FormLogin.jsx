@@ -2,6 +2,7 @@
 import { loginSuccess } from '../../redux/Actions';
 import { useDispatch, useSelector } from 'react-redux';
 
+
 //router
 import { Link, useNavigate } from "react-router-dom";
 
@@ -9,6 +10,7 @@ import { useState } from "react";
 import styleForm from "../Form/Form.module.css";
 import Validation from "./Validation";
 import axios from "axios";
+
 
 export default function FormLogin() {
   const [loginValues, setLoginValues] = useState({});
@@ -39,6 +41,7 @@ export default function FormLogin() {
       if (access) {
         // Loguear al usuario
         dispatch(loginSuccess({ email, password }));
+       
         // Redirigir a la página de User
         navigate("/User");
       } else {

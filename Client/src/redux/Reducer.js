@@ -13,6 +13,13 @@ function rootReducer(state = initialState, { type, payload }) {
     isLoggedIn: true,
     userData: payload
   };
+  
+  case 'LOGOUT_SUCCESS':
+      return {
+        ...state,
+        isLoggedIn: false,
+        userData: null,
+      };
       
     case 'ADD_TO_FAV':
       return {
