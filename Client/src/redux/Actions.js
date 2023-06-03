@@ -1,13 +1,21 @@
-export const addToCart = (item) => {
+export const addToFav = (item) => {
+  
   return {
-    type: 'ADD_TO_CART',
+    type: 'ADD_TO_FAV',
     payload: item
   };
 };
 
-export const removeFromCart = (item) => {
+export const removeFromFav = (item) => {
   return {
-    type: 'REMOVE_FROM_CART',
+    type: 'REMOVE_FROM_FAV',
     payload: item
   };
 };
+
+
+export const loginSuccess = (userData) => ({
+  type: 'LOGIN_SUCCESS',
+  payload: userData,
+});
+

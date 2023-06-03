@@ -19,7 +19,7 @@ export default function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/characters" element={<Characters />} />
-        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/detail/:name" element={<Detail />} />
         <Route path="/login" element={<AuthForm />} />
         <Route path="/user" element={<User />} />
         <Route path="*" element={<Error404 />} />

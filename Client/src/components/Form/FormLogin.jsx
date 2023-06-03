@@ -1,14 +1,22 @@
-import { useState } from "react";
+//login redux
+import { loginSuccess } from '../../redux/Actions';
+import { useDispatch, useSelector } from 'react-redux';
+
+//router
 import { Link, useNavigate } from "react-router-dom";
+
+import { useState } from "react";
 import styleForm from "../Form/Form.module.css";
 import Validation from "./Validation";
+import axios from "axios";
 
 export default function FormLogin() {
-  const [loginValues, setLoginValues] = useState({
-    email: "",
-    password: "",
-  });
+  const [loginValues, setLoginValues] = useState({});
   const [formErrors, setFormErrors] = useState({});
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(state => state.isLoggedIn);
+  
 
   const handleChange = (e) => {
     setLoginValues({ ...loginValues, [e.target.name]: e.target.value });
@@ -17,41 +25,28 @@ export default function FormLogin() {
     );
   };
 
-  // Crear un objeto con las credenciales que quieres usar
-  let Employer = {
-    email: "email@email.com",
-    password: "password123",
-  };
-
-  // Crear una función para validar el login
-  const validateLogin = (username, password) => {
-    if (username === Employer.email && password === Employer.password) {
-     
-      return true;
-    } else {
-     
-      return false;
-    }
-  };
-
-  const navigate = useNavigate();
-
   // Llamar a la función en el handleSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Obtener los valores del estado
-    const { email, password } = loginValues;
     // Validar el login
-    const isAuthenticated = validateLogin(email, password);
+    const { email, password } = loginValues;
 
-    if (isAuthenticated) {
-      // Loguear al usuario
-      // Redirigir a la página de inicio
-      navigate("/User");
-    } else {
-      // Mostrar un mensaje de error
-      alert("Usuario o contraseña inválidos");
-    }
+    const URL =
+      "https://ryokumaxell-symmetrical-winner-r79gpxvqj64hxrwg-3001.preview.app.github.dev/rickandmorty/api/login/";
+    axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+      const { access } = data;
+
+      if (access) {
+        // Loguear al usuario
+        dispatch(loginSuccess({ email, password }));
+        // Redirigir a la página de User
+        navigate("/User");
+      } else {
+        // Mostrar un mensaje de error
+        alert("Usuario o contraseña inválidos");
+      }
+      
+    });
   };
 
   return (
@@ -89,6 +84,7 @@ export default function FormLogin() {
           />
           {formErrors.password && <div>{formErrors.password}</div>}
         </div>
+        {isLoggedIn && <p>Bienvenido, has iniciado sesión correctamente.</p>}
         <button type="submit">Submit</button>
       </form>
     </div>

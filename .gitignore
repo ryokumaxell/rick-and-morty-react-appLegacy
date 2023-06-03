@@ -1,0 +1,17 @@
+# Ignorar la carpeta node_modules en ambos proyectos
+/Client/node_modules/
+/Server/node_modules/
+
+# Ignorar los archivos de construcción y compilación
+/Client/build/
+/Server/build/
+/Client/dist/
+/Server/dist/
+
+# Ignorar archivos de registro generados por npm o Yarn
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Ignorar el archivo de variables de entorno local
+.env

@@ -1,46 +1,55 @@
-import React, { useEffect, useState } from 'react';
+//data character
+import { fetchData,fetchDataId } from "../../data/Data";
+
+//Common use
+import React, { useEffect, useState } from "react";
 import Cards from "../../components/Cards/Cards";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import { fetchData } from "../../data/Data";
-import styleCharacters from '../Characters/Characters.module.css'
+import styleCharacters from "../Characters/Characters.module.css";
 
 export default function Characters() {
   const [characters, setCharacters] = useState([]);
   const [searchName, setSearchName] = useState("");
 
+  
   useEffect(() => {
-    const fetchCharacters = async () => {
-      const results = await fetchData();
-      setCharacters(results);
-    };
-    fetchCharacters();
-  }, []);
-
-  const handleSearch = async () => {
+    
+      fetchData()
+        .then(data => {
+          setCharacters(data.results);
+        })
+        .catch(error => {
+          console.log(error);
+        });
    
-    if (searchName) {
-      const url = `https://ryokumaxell-symmetrical-winner-r79gpxvqj64hxrwg-3001.preview.app.github.dev/api/character/`;
-      // const url = `https://rickandmortyapi.com/api/character/?name=${searchName}`;
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log(data.results)
-        setCharacters(data.results);
-      } catch (error) {
-        console.error(error);
-      }
-    }
+  
+        fetchData();
+  }, []);
+  
+
+  // call of character by name
+  const handleSearch = () => {
+    
+   
+
+    fetchDataId(searchName)
+    .then(data => {
+      setCharacters(data); // Imprime el resultado dentro de then()
+    })
+    .catch(error => {
+      console.log(error); // Maneja el error si ocurre
+    });
+  
+    
   };
+  
 
   return (
     <>
       <div className={styleCharacters.container}>
         <h1>Characters</h1>
-        <SearchBar
-          onSearch={handleSearch}
-          setSearchName={setSearchName}
-        />
-        <Cards characters={characters} />
+        <SearchBar onSearch={handleSearch} setSearchName={setSearchName} />
+        <Cards chars={characters} />
       </div>
     </>
   );

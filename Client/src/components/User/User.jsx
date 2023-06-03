@@ -1,18 +1,20 @@
-import store from '../../redux/Store';
+import { useSelector } from 'react-redux';
 
 export default function User() {
-  const state = store.getState();
-  const characters = state.cards;
+  const characters = useSelector((state) => state.fav);
+ 
 
   return (
     <div>
-      <h1>bienbenido</h1>
-      {characters.map((character) => (
-        <div key={character.id}>
-          <h2>{character.name}</h2>
-          <p>{character.description}</p>
-        </div>
-      ))}
+      <h1>Bienvenido</h1>
+      {Array.isArray(characters) &&
+        characters.map((character) => (
+          <div key={character.id}>
+            <h2>{character.name}</h2>
+            <p>{character.description}</p>
+          </div>
+        ))}
     </div>
   );
 }
+

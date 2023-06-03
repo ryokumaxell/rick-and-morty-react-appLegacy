@@ -1,26 +1,31 @@
-
 const initialState = {
-  cards: [],
-  total: 0
+  fav:[],
+  isLoggedIn: false,
+  userData: null,
 };
 
-function Reducer(state = initialState, action) {
-  switch (action.type) {
-    case 'ADD_TO_CART':
-      if (!Array.isArray(state.cards)) {
-        state.cards = [];
-      }
+function rootReducer(state = initialState, { type, payload }) {
+  
+  switch (type) {
+    case 'LOGIN_SUCCESS':
+  return {
+    ...state,
+    isLoggedIn: true,
+    userData: payload
+  };
+      
+    case 'ADD_TO_FAV':
       return {
         ...state,
-        cards: [...state.cards, action.payload]
+        fav: [...state.fav, payload]
       };
-    case 'REMOVE_FROM_CART':
-      const index = state.cards.findIndex(item => item.id === action.payload.id);
+    case 'REMOVE_FROM_FAV':
+      const index = state.fav.findIndex(item => item.id === payload.id);
       return {
         ...state,
-        cards: [
-          ...state.cards.slice(0, index),
-          ...state.cards.slice(index + 1)
+        fav: [
+          ...state.fav.slice(0, index),
+          ...state.fav.slice(index + 1)
         ]
       };
     default:
@@ -28,4 +33,4 @@ function Reducer(state = initialState, action) {
   }
 }
 
-export default Reducer;
+export default rootReducer;
