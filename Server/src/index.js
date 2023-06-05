@@ -21,7 +21,11 @@ server.use((req, res, next) => {
   next();
 });
 
-
+// Middleware para redirigir todas las peticiones a '/rickandmorty/api'
+server.use('/', (req, res, next) => {
+  req.url = '/rickandmorty/api' + req.url;
+  next();
+});
 
 // Middleware para parsear el body como JSON
 server.use(express.json());

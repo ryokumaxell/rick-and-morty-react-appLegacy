@@ -3,14 +3,17 @@ const getAllChar = require('../controllers/getAllChar');
 const getCharByName = require('../controllers/getCharByName');
 const login = require('../controllers/login');
 const {postFav,deleteFav} = require('../controllers/handleFavorites');
+const getWelcome = require('../controllers/getWelcome');
  
 // Importar la función Router de express
 const { Router } = require('express');
+
 
 // Crear una instancia de Router
 const router = Router();
 
 // Definir las rutas
+router.get('/', getWelcome);
 router.get('/character', getAllChar);
 router.get('/character/:name', getCharByName);
 router.get('/login', login);

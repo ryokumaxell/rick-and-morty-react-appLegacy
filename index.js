@@ -13,3 +13,4 @@ startProject1.stderr.pipe(process.stderr);
 const startProject2 = exec('npm start', { cwd: project2Path });
 startProject2.stdout.pipe(process.stdout);
 startProject2.stderr.pipe(process.stderr);
+
